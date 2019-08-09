@@ -23,4 +23,9 @@ def main():
 
 
 if __name__ == "__main__":
-    main()
+    fail_execution = 0
+    try: 
+        main()
+    except:
+        fail_execution += 1 
+        main()
