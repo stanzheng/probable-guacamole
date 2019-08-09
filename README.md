@@ -16,6 +16,12 @@ brew install
 pipenv run python main.py 
 ```
 
+## Tests
+```
+pipenv install
+pipenv run pytest
+```
+
 
 ### PROMPT
 The assignment description is below, a few things to remember:
