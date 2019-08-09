@@ -1,6 +1,20 @@
 # probable-guacamole
 
+# Dependencies 
+- [Python 3.7x](https://www.python.org/downloads/)
+- [Pipenv] (https://github.com/pypa/pipenv)
 
+##
+
+## Install
+```bash
+brew install python
+brew install
+```
+## Run
+```
+pipenv run python main.py 
+```
 
 
 ### PROMPT
