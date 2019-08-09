@@ -1,5 +1,6 @@
 import os 
 import json
+import time 
 
 import asyncio
 import aiohttp
@@ -8,6 +9,7 @@ from aiohttp_requests import requests
 GITHUB_USER = os.environ.get('GITHUB_USER')
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 GITHUB_BASE_URL= 'https://api.github.com/search/'
+RATE_LIMIT_BACKOFF = 0
 
 def pp(d): return json.dumps(d, indent=4, sort_keys=True)
 
@@ -30,17 +32,51 @@ async def query_generic(URL, **args):
     json = await response.json()
     return response, text, json
 
+def rate_limit_queue(backoff=0):
+    """Provides a Fake Queue Backoff. *NOTE* This Blocks All Execution on Thread
+    # @TODO Proper interface would be use the pypy package backoff
+    # @TODO Proper interface would be use the queue with `timeout` attribute
+    """
+    if backoff == 0:
+        return 
+    time.sleep(backoff(0))
+
+def search_repositories(query, per_page):
+    loop = asyncio.get_event_loop()
+
+    req, text, res = loop.run_until_complete(
+        query_repositories({
+        'q': query,
+        'per_page': per_page,
+        'page': 1
+    }))
+    # print(req.headers, req.get_encoding(), parse_repositories(res))
+    # import ipdb; ipdb.set_trace()
+    for i in range(2, len(res['items'])):
+        req, text, res = loop.run_until_complete(
+            query_repositories({
+            'q': query,
+            'per_page': per_page,
+            'page': i
+        }))
+        # import ipdb; ipdb.set_trace()
+        if i == 2:
+            break
+        print(req.headers, req.get_encoding(), parse_repositories(res))
+
 if __name__ == "__main__":    
     loop = asyncio.get_event_loop()
     query = 'foo'
     per_page = 50
     req, text, res = loop.run_until_complete(query_repositories({
-        'q': 'query,
+        'q': query,
         'per_page': per_page
     }))
+    rate_limit_queue(backoff=RATE_LIMIT_BACKOFF)
     for i in range(2, len(res['items'])):
 
         if i == 2:
             break
+        rate_limit_queue(backoff=RATE_LIMIT_BACKOFF)
         print(req.headers, req.get_encoding(), parse_repositories(res))
-        import ipdb; ipdb.set_trace()
+        # import ipdb; ipdb.set_trace()
