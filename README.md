@@ -3,8 +3,14 @@
 # Dependencies 
 - [Python 3.7x](https://www.python.org/downloads/)
 - [Pipenv] (https://github.com/pypa/pipenv)
+- [Github Access Token Basic Auth](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 
-##
+## Usage
+--
+"enter streaming key term when prompted" 
+* To control page streaming append the string `~page_size=50` to end of query 
+* To control streaming input `Y/N` for continuous streaming mode for results
+
 
 ## Install
 ```bash
@@ -14,13 +20,15 @@ brew install
 ## Run
 ```
 # Environment 
+cp sample.env .env
+# fill in .env with github token see instructions above
 pipenv run python main.py 
 ```
 
 ## Tests
 ```
 pipenv install
-pipenv run pytest
+pipenv run pytest # woops didn't get to this 
 ```
 
 ## Resources
@@ -53,7 +61,7 @@ Here’s the tasks to complete in a rough order:
 
 - [x] Add pagination support - use the page arguments and be able to control how much data is returned to client and allow the client to specify how much data they want.
 
-- [ ] Make the tool be push based, meaning the client makes a query and the tool keeps querying the API and pushing new results as they come in. You can treat pages like new results for testing.
+- [x] Make the tool be push based, meaning the client makes a query and the tool keeps querying the API and pushing new results as they come in. You can treat pages like new results for testing.
 
 - [ ] Implement fault tracking. Imagine the API will change in the future and your calls will break - we want to know when this happens and for how long we get errors. You can test this by sending bad requests.
 

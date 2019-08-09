@@ -1,10 +1,11 @@
 import os 
-import json
 import time
 
 import asyncio
 import aiohttp
 from aiohttp_requests import requests
+
+import backoff
 
 GITHUB_USER = os.environ.get('GITHUB_USER')
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
@@ -12,7 +13,6 @@ GITHUB_BASE_URL= 'https://api.github.com/search/'
 RATE_LIMIT_BACKOFF = 0
 DEFAULT_PAGES_RETURNED = 2
 
-def pretty_print(d): return json.dumps(d, indent=4, sort_keys=True)
 
 async def query_repositories(params):
     """
@@ -41,17 +41,18 @@ def rate_limit_queue(backoff=0):
     if backoff == 0:
         return 
     time.sleep(backoff)
-
+ 
+@backoff.on_exception(backoff.expo, Exception)
 def search_repositories(query, per_page, page=1, counter=DEFAULT_PAGES_RETURNED):
     loop = asyncio.get_event_loop()
-
-    req, _, res = loop.run_until_complete(
+    print("Starting Requests....")
+    req, text, res = loop.run_until_complete(
         query_repositories({
         'q': query,
         'per_page': per_page,
         'page': page
     }))
-    # print(req.headers, req.get_encoding(), parse_repositories(res))
+    # print(req.headers, text, req.get_encoding(), parse_repositories(res))
     if counter != 0 and res['incomplete_results']== False:
         return parse_repositories(res) + search_repositories(query,per_page, page=page+1, counter=counter-1)
     else:
