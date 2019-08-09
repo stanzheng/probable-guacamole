@@ -10,8 +10,9 @@ GITHUB_USER = os.environ.get('GITHUB_USER')
 GITHUB_TOKEN = os.environ.get('GITHUB_TOKEN')
 GITHUB_BASE_URL= 'https://api.github.com/search/'
 RATE_LIMIT_BACKOFF = 0
+DEFAULT_PAGES_RETURNED = 2
 
-def pp(d): return json.dumps(d, indent=4, sort_keys=True)
+def pretty_print(d): return json.dumps(d, indent=4, sort_keys=True)
 
 async def query_repositories(params):
     """
