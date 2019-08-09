@@ -13,6 +13,7 @@ brew install
 ```
 ## Run
 ```
+# Environment 
 pipenv run python main.py 
 ```
 
