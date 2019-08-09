@@ -9,6 +9,7 @@ verify_ssl = true
 pytest = "*"
 asyncio = "*"
 aiohttp-requests = "*"
+backoff = "*"
 
 [requires]
 python_version = "3.7"
