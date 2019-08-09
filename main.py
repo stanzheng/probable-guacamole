@@ -10,7 +10,7 @@ def pretty_print(d): return json.dumps(d, indent=4, sort_keys=True)
 def get_page_size(search):
     ar = search.split('~')
     if len(ar) > 1:
-        return ar[1].split('per_page=')[1]
+        return ar[1].split('page_size=')[1]
     else:
         return DEFAULT_PAGE_SIZE
 
