@@ -22,12 +22,15 @@ pipenv install
 pipenv run pytest
 ```
 
+## Resources
+- 
+- 
 
 ### PROMPT
 The assignment description is below, a few things to remember:
-- Take around 3 hours, when that time is almost up, you should take a few more minutes to wrap up what you were working on, zip up the code, and send it over.
-- Focus on accomplishing each step in full before moving onto the next.
-- You can email me with any additional questions.
+- [ ] Take around 3 hours, when that time is almost up, you should take a few more minutes to wrap up what you were working on, zip up the code, and send it over.
+- [ ]Focus on accomplishing each step in full before moving onto the next.
+- [ ]You can email me with any additional questions.
 
 API Assignment
 
