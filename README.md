@@ -46,7 +46,7 @@ Do not try to do everything at once - you should tackle one piece at a time. The
 
 Here’s the tasks to complete in a rough order:
 
-- [ ] Implement the search API to find repositories.
+- [x] Implement the search API to find repositories.
 
 - [ ]GitHub has rate limiting, implement something that understands the rate limits and allows the client to control the rate it sends requests.
     - Possibly using backfill
