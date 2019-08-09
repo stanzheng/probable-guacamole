@@ -40,7 +40,7 @@ def rate_limit_queue(backoff=0):
     """
     if backoff == 0:
         return 
-    time.sleep(backoff(0))
+    time.sleep(0)
 
 def search_repositories(query, per_page, page=1, counter=DEFAULT_PAGES_RETURNED):
     loop = asyncio.get_event_loop()
