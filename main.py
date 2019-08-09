@@ -16,7 +16,16 @@ def main():
         print("option flags, specify page size: ~page_size=50")
         search = input('Please Enter a Search Term or type `:q` to quit: ')
         per_page = get_page_size(search) 
-        print(github.search_repositories(search, per_page))
+        push_mode = input('Push Mode On? Y/N - (CTR+C to exit): ')
+        if push_mode.lower() == 'y':
+            print('Starting Unlimited Streaming for: {}'.format(search))
+            page_counter = 1
+            while True:
+                print(github.search_repositories(search, per_page, page=page_counter, counter=0))
+                page_counter +=1
+                github.rate_limit_queue(10) # Rate limits by one query per set seconds
+        else:
+            print(github.search_repositories(search, per_page))
         if search == ':q':
             break
     print('Goodbye!')

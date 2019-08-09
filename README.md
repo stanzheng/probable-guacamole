@@ -26,6 +26,7 @@ pipenv run pytest
 ## Resources
 - https://developer.github.com/v3/search/#search-repositories
 - https://developer.github.com/v3/guides/traversing-with-pagination/
+- https://medium.com/pythonhive/python-decorator-to-measure-the-execution-time-of-methods-fa04cb6bb36d
 
 ### PROMPT
 The assignment description is below, a few things to remember:
