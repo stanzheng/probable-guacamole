@@ -45,13 +45,14 @@ def rate_limit_queue(backoff=0):
 @backoff.on_exception(backoff.expo, Exception)
 def search_repositories(query, per_page, page=1, counter=DEFAULT_PAGES_RETURNED):
     loop = asyncio.get_event_loop()
-    print("Starting Requests....")
+    print("Starting Requests... Page:{}".format(page))
     req, text, res = loop.run_until_complete(
         query_repositories({
         'q': query,
         'per_page': per_page,
         'page': page
     }))
+    # debug string
     # print(req.headers, text, req.get_encoding(), parse_repositories(res))
     if counter != 0 and res['incomplete_results']== False:
         return parse_repositories(res) + search_repositories(query,per_page, page=page+1, counter=counter-1)

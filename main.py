@@ -1,11 +1,10 @@
 import json
 import github
-import urllib.parse
 
 DEFAULT_PAGE_SIZE = 30
 
 
-def pretty_print(d): return json.dumps(d, indent=4, sort_keys=True)
+def pretty_print(d): return print(json.dumps(d, indent=4, sort_keys=True))
 
 def get_page_size(search):
     ar = search.split('~')
@@ -13,18 +12,24 @@ def get_page_size(search):
         return ar[1].split('page_size=')[1]
     else:
         return DEFAULT_PAGE_SIZE
+def github_encode(s):
+    """Github encode strings so for example 
+    "bootstrap frontend" => "bootstrap+frontend"
+    """
+    return '+'.join(s.split())
 
 
-def main():
+def main(): 
     while (True):
         print("option flags, specify page size: ~page_size=50")
         search = input('Please Enter a Search Term or type `:q` to quit: ')
         # validate input
+        search = github_encode(search.split('~')[0]) 
+        print(search, github_encode(search))
         if len(search)==0:
             continue
         per_page = get_page_size(search) 
         push_mode = input('Push Mode On? Y/N - (CTR+C to exit): ')
-        print(search, urllib.parse.quote(search))
         if push_mode.lower() == 'y':
             print('Starting Unlimited Streaming for: {}'.format(search))
             page_counter = 1

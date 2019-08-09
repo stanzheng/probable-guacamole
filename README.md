@@ -11,6 +11,13 @@
 * To control page streaming append the string `~page_size=50` to end of query 
 * To control streaming input `Y/N` for continuous streaming mode for results
 
+example
+- `react` `N/Streaming`
+- `react ~page_size=10` `N/Streaming`
+- `boostrap` `Y/Streaming`
+
+
+
 
 ## Install
 ```bash
