@@ -24,8 +24,8 @@ pipenv run pytest
 ```
 
 ## Resources
-- 
-- 
+- https://developer.github.com/v3/search/#search-repositories
+- https://developer.github.com/v3/guides/traversing-with-pagination/
 
 ### PROMPT
 The assignment description is below, a few things to remember:
