@@ -49,9 +49,8 @@ Here’s the tasks to complete in a rough order:
 - [x] Implement the search API to find repositories.
 
 - [ ]GitHub has rate limiting, implement something that understands the rate limits and allows the client to control the rate it sends requests.
-    - Possibly using backfill
 
-- [ ] Add pagination support - use the page arguments and be able to control how much data is returned to client and allow the client to specify how much data they want.
+- [x] Add pagination support - use the page arguments and be able to control how much data is returned to client and allow the client to specify how much data they want.
 
 - [ ] Make the tool be push based, meaning the client makes a query and the tool keeps querying the API and pushing new results as they come in. You can treat pages like new results for testing.
 
