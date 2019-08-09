@@ -48,7 +48,7 @@ Here’s the tasks to complete in a rough order:
 
 - [x] Implement the search API to find repositories.
 
-- [ ]GitHub has rate limiting, implement something that understands the rate limits and allows the client to control the rate it sends requests.
+- [x]GitHub has rate limiting, implement something that understands the rate limits and allows the client to control the rate it sends requests.
 
 - [x] Add pagination support - use the page arguments and be able to control how much data is returned to client and allow the client to specify how much data they want.
 

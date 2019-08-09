@@ -1,6 +1,6 @@
 import os 
 import json
-import time 
+import time
 
 import asyncio
 import aiohttp
@@ -41,28 +41,20 @@ def rate_limit_queue(backoff=0):
         return 
     time.sleep(backoff(0))
 
-def search_repositories(query, per_page):
+def search_repositories(query, per_page, page=1, counter=DEFAULT_PAGES_RETURNED):
     loop = asyncio.get_event_loop()
 
     req, text, res = loop.run_until_complete(
         query_repositories({
         'q': query,
         'per_page': per_page,
-        'page': 1
+        'page': page
     }))
-    # print(req.headers, req.get_encoding(), parse_repositories(res))
-    # import ipdb; ipdb.set_trace()
-    for i in range(2, len(res['items'])):
-        req, text, res = loop.run_until_complete(
-            query_repositories({
-            'q': query,
-            'per_page': per_page,
-            'page': i
-        }))
-        # import ipdb; ipdb.set_trace()
-        if i == 2:
-            break
-        print(req.headers, req.get_encoding(), parse_repositories(res))
+    print(req.headers, req.get_encoding(), parse_repositories(res))
+    if counter != 0 and res['incomplete_results']== False:
+        return parse_repositories(res) + search_repositories(query,per_page, page=page+1, counter=counter-1)
+    else:
+        return []
 
 if __name__ == "__main__":    
     loop = asyncio.get_event_loop()
