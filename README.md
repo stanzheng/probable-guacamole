@@ -2,7 +2,7 @@
 
 # Dependencies 
 - [Python 3.7x](https://www.python.org/downloads/)
-- [Pipenv] (https://github.com/pypa/pipenv)
+- [Pipenv](https://github.com/pypa/pipenv)
 - [Github Access Token Basic Auth](https://help.github.com/en/articles/creating-a-personal-access-token-for-the-command-line)
 
 ## Usage
